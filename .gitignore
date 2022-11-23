@@ -1,1 +1,2 @@
-~/node_modules
+react-app-without-create-react-app/node_modules
+react-app-with-create-react-app/node_modules
