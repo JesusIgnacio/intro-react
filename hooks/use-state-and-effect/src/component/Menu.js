@@ -7,6 +7,7 @@ function Menu() {
   useEffect(
     () => {
       console.log("first time")
+      return () => { console.log("Unmounting")}
     }, []
   ) // onMounting
 
