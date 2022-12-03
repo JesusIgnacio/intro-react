@@ -4,6 +4,7 @@ function Menu() {
   const[total, setTotal] = useState(0)
   const[list, setList] = useState([])
   const[color, setColor] = useState("red")
+  const[tasks, setTasks] = useState([])
 
   const increase = _ => setTotal(prev => prev + 1)
   const decrease = _ => setTotal(prev => prev - 1)
@@ -12,6 +13,17 @@ function Menu() {
   const decreaseList = _ => setList(previous => previous.slice(0, previous.length - 1))
 
   const change = (color) => setColor(previous => color)
+  const validate = (e) => {
+    if (e.key === 'Enter'){
+      setTasks(prev => [...prev, e.target.value])
+    }
+  }
+
+  const deleteTask = (task) => {
+    setTasks(prev => {
+      prev.filter(p => p != task)
+    })
+  }
   
   useEffect( 
     () => {
@@ -40,6 +52,17 @@ function Menu() {
 
     return (
       <>
+        <div className='card'>
+          <div className="card-body">
+            <h5 className="card-title">Tasks List</h5>
+            <input type="text" className="form-control" placeholder="Task ..." onKeyDown={e => validate(e)}/>
+            {
+              tasks && tasks.map((task, i) => {
+                return <p key= {i} className="card-text" onClick={e => deleteTask(task)}>{task}</p>
+              })
+            }
+          </div>
+        </div>
         <div  className="card">
           <div className="card-body">
             <h5 className="card-title">Total increment</h5>
